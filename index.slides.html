@@ -13259,20 +13259,21 @@ a.anchor-link {
 -->
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Why-a-new-infrastructure-for-docs?">Why a new infrastructure for docs?<a class="anchor-link" href="#Why-a-new-infrastructure-for-docs?">&#182;</a></h2><h4 id="Problems">Problems<a class="anchor-link" href="#Problems">&#182;</a></h4><ul>
 <li>Technical documentation is very important but nobody loves writing docs</li>
-<li>Websites use lot of HTML5/Javascript/CSS technology</li>
+<li>Websites use lot of HTML5/Javascript/CSS4 technology</li>
 <li>Abinit developers are more familiar with plain text files and $\LaTeX$</li>
-<li>Users expept to </li>
+<li>Users exepct to find an interactive and responsive website </li>
 </ul>
 <h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><ul>
 <li>Use Markdown for documentation files </li>
 <li>Use well-established python frameworks to generate static website from markdown files</li>
-<li>In</li>
+<li>Extend the framework with plugins that can reuse all the python code written for the 
+TestSuite and the database of input variables</li>
 </ul>
 
 </div>
@@ -13281,165 +13282,203 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./assets/abipy_logo.jpg" width="55%" align="center">
-<!-- img src="./assets/abinit_logo.jpg" width="45%" align="right"--></p>
+<h2 id="Software-stack-(yes,-we-need-libraries)">Software stack (yes, we need libraries)<a class="anchor-link" href="#Software-stack-(yes,-we-need-libraries)">&#182;</a></h2><ul>
+<li><a href="https://github.com/Python-Markdown/markdown">Python Markdown</a></li>
+<li>pygments</li>
+<li>pybtex</li>
+<li>pymdown-extensions</li>
+<li>mkdocs</li>
+</ul>
+<p>The website is automatically generated with <a href="http://www.mkdocs.org/">MkDocs</a>
+a static site generator geared towards project documentation.
+MkDocs employs <a href="https://pypi.python.org/pypi/Markdown">Python-Markdown</a> to parse the Markdown documentation
+and use a single <a href="http://en.wikipedia.org/wiki/YAML">YAML</a> configuration file (<code>mkdocs.yml</code>) 
+defining the organization of the pages on the website.
+Navigation bars, header and footer are generated <em>automatically</em> by the framework
+using the <a href="http://jinja.pocoo.org/">jinja template engine</a>.
+Previous versions of the documentation can be consulted using the drop down menu 
+at the top-right corner. (==not yet operational==)</p>
+<p>MkDocs includes a couple built-in themes as well as various third party themes,
+all of which can easily be customized with extra CSS or JavaScript or overridden from the theme directory. 
+The Abinit website uses <a href="http://squidfunk.github.io/mkdocs-material/">Mkdocs-Material</a>, a theme
+built using Google's <a href="https://www.google.com/design/spec/material-design">Material Design</a> guidelines.
+We also use <a href="https://fontawesome.com/">fontawesome icons</a> and
+<a href="http://getbootstrap.com/">Bootstrap</a> a popular HTML, CSS, and Javascript framework 
+for developing responsive, mobile first projects on the web 
+(shrink the browser window to see how the menu and the navigation bars react).</p>
+<p>Note that the majority of the Abinit developers do not need to know how to use these technologies
+since they will mainly interact with markdown files (plain text files that can be easily modified in the editor)
+while Mkdocs will handle the HTML/CSS/Javascript part.</p>
+<p>In addition to the basic markdown syntax, the Abinit documentation supports extensions and shortcuts
+to ease the writing of hyperlinks and the inclusion of bibliographic citations.
+A detailed description of <em>our markdown dialect</em> is given in <a href="markdown">our markdown page</a>.
+Also <a href="https://www.mathjax.org/">MathJax</a> for equations in LaTeX is activated, 
+and the (few) specificities of its usage in the Abinit docs are explained <a href="markdown.md#mathjax">in this section</a>.</p>
+<p>As a net result, Abinit developers can write nice-looking documentation and release notes without having to use 
+HTML explicitly while working in an environment that is well-integrated with the Abinit ecosystem 
+(the yaml database of input variables, the test suite, bibtex citations).
+Adding new content is straightforward: write a new page in Markdown, add the new entry to <code>mkdocs.yml</code> 
+and finally regenerate the website with MkDocs.</p>
+<p>Dependencies are listed in <em>~abinit/requirements.txt</em></p>
+<p>Use:</p>
+<div class="highlight"><pre><span></span>pip install -r requirements.txt --user
+</pre></div>
+<p>to install the python packages in user mode.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="How-to-build-to-website">How to build to website<a class="anchor-link" href="#How-to-build-to-website">&#182;</a></h3>
+<pre><code>cd ~abinit 
+./mksite.py serve --dirtyreload
+
+Regenerating database...
+Saving database to /Users/gmatteo/git_repos/abidocs/doc/tests/test_suite.cpkl
+Initial website generation completed in 9.17 [s]
+Generating markdown files with input variables of code: `abinit`...
+...
+...
+INFO    -  Building documentation...
+INFO    -  Cleaning site directory
+[I 170826 03:37:05 server:283] Serving on http://127.0.0.1:8000
+[I 170826 03:37:05 handlers:60] Start watching changes
+[I 170826 03:37:05 handlers:62] Start detecting changes</code></pre>
+<p>Use --dirtyreload</p>
+<p>Note: Live reloading is not supported in variables, input files. You need to CTRL+C the webserver and restart it.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./assets/mkdocs.jpg" width="55%" align="center"></p>
 <h2 id="What-is-AbiPy?">What is AbiPy?<a class="anchor-link" href="#What-is-AbiPy?">&#182;</a></h2><h4 id="Python-package-for:">Python package for:<a class="anchor-link" href="#Python-package-for:">&#182;</a></h4><ul>
-<li>Generating ABINIT input files automatically</li>
-<li>Post-processing output results (<em>netcdf</em> and <em>text</em> files)</li>
-<li>Interfacing ABINIT with external tools (e.g. <a href="http://jp-minerals.org/vesta/en/">Vesta</a>)</li>
-<li>Creating and executing workflows (band structures, phonons, $GW$…)</li>
-</ul>
-<h4 id="Project:">Project:<a class="anchor-link" href="#Project:">&#182;</a></h4><ul>
-<li>Developed and maintained by the ABINIT community</li>
-<li>Used by developers to validate, profile and optimize ABINIT</li>
-<li>Hosted on <a href="https://github.com/abinit/abipy">github</a> </li>
-<li>Release under the GPLv2 license</li>
+<li>MkDocs is a Python-based static site generator that combines Markdown content with Jinja2 
+templates to produce websites.</li>
+<li>MkDocs' source code is available on GitHub under the BSD 2-clause license.</li>
+<li>Easy configuration via YAML file </li>
 </ul>
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Why-python?">Why python?<a class="anchor-link" href="#Why-python?">&#182;</a></h2><ul>
-<li>Easy to use and to learn</li>
-<li>Great support for science (<a href="http://www.numpy.org/">numpy</a>, <a href="https://www.scipy.org/">scipy</a>, <a href="http://pandas.pydata.org/">pandas</a>, <a href="https://matplotlib.org/">matplotlib</a> …)</li>
-<li>Interactive environments (<a href="http://ipython.org/">ipython</a>, <a href="https://jupyter.org/">jupyter notebooks</a>, GUIs)</li>
-<li>More powerful and flexible than Fortran for implementing the high-level logic needed in modern ab-initio workflows</li>
-<li><a href="https://github.com/materialsproject">pymatgen</a> ecosystem and the <a href="https://www.materialsproject.org/">materials project database</a>…</li>
-</ul>
-<p><img src="./assets/pydata_stack.png" width="65%" align="center"></p>
+<p>In order to add a new tutorial, create a new Markdown file in doc/tutorial and 
+register it in <code>mkdocs.yml</code> 
+Then, build the HTML using `./mksite.py serve</p>
+<h3 id="Excerpt-of-mkdocs.yml">Excerpt of mkdocs.yml<a class="anchor-link" href="#Excerpt-of-mkdocs.yml">&#182;</a></h3><div class="highlight"><pre><span></span><span class="nt">pages</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">Tutorial</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">Overview</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/index.md</span>
+    <span class="p p-Indicator">-</span> <span class="nt">Base Tutorials</span><span class="p">:</span> 
+        <span class="p p-Indicator">-</span> <span class="nt">Base1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base1.md</span>
+        <span class="p p-Indicator">-</span> <span class="nt">Base2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base2.md</span>
+        <span class="p p-Indicator">-</span> <span class="nt">Base3</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base3.md</span>
+        <span class="p p-Indicator">-</span> <span class="nt">Base4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base4.md</span>
+        <span class="p p-Indicator">-</span> <span class="nt">Spin</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/spin.md</span>
+    <span class="p p-Indicator">-</span> <span class="nt">PAW</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">PAW1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw1.md</span>
+        <span class="p p-Indicator">-</span> <span class="nt">PAW2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw2.md</span>
+        <span class="p p-Indicator">-</span> <span class="nt">PAW3</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw3.md</span>
+</pre></div>
+<h3 id="HTML-page:">HTML page:<a class="anchor-link" href="#HTML-page:">&#182;</a></h3><p><img src="./assets/tutorial_yaml_pages.png" width="75%" align="center"></p>
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="AbiPy-design-principles">AbiPy design principles<a class="anchor-link" href="#AbiPy-design-principles">&#182;</a></h2><ul>
-<li>Extend the pymatgen code-base with ABINIT-specific objects</li>
-<li><p>Layered structure designed for different use-cases:</p>
+<h2 id="Markdown-and-Abinit-extensions">Markdown and Abinit extensions<a class="anchor-link" href="#Markdown-and-Abinit-extensions">&#182;</a></h2><p>Most of the documentation is written in <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>
+a lightweight markup language with plain text 
+<a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">formatting syntax</a>.
+The documentation includes the User Guide, the Abinit tutorial, the topics, the release notes
+as well as the pages with the <a href="../variables/">input variables</a> and the <a href="../theory/bibliography.md">bibliographic references</a>
+that are generated <em>automatically</em> in python from the information reported in 
+<code>~abinit/mkdocs/variables_abinit.py</code> (and similar files in the same directory for other main executables) and the bibtex 
+entries given in the <code>~abinit/doc/abiref.bib</code> file.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="MathJax-integration">MathJax integration<a class="anchor-link" href="#MathJax-integration">&#182;</a></h2><p>Formulas written in LaTeX are interpreted automatically (at visualization time) thanks to the
+<a href="http://docs.mathjax.org/en/latest/mathjax.html">MathJax</a> on-the-flight processor
+while the math extension for Python-Markdown is provided by
+<a href="https://github.com/mitya57/python-markdown-math">python-markdown-math</a>.</p>
+<p>Latex equations can be used <strong>everywhere</strong> including the description of the variables
+reported in <code>abinit_vars.yml</code> and the description of the tests gives in the <code>TEST_INFO</code> section.
+For the Abinit documentation, the conventions are:</p>
 <ul>
-<li>Post-processing tools and command-line interfaces</li>
-<li>API to automate calculations and data analysis</li>
-<li>High-throughput infrastructure (<a href="https://github.com/abinit/abiflows">abiflows</a>, <a href="https://github.com/materialsproject/fireworks">fireworks</a>, <a href="https://www.mongodb.com/">mongodb</a>)</li>
+<li><code>$...$</code>  yields an <em>onlinecite</em> translation of the LaTeX formula.</li>
+<li><code>$$...$$</code> yields <em>display</em> mode, the LaTeX formula being rendered on one dedicated line (moreover, centered).</li>
+<li>To have the equations numbered, use the display mode above, and (inside the markers) declare your equation
+within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
+<li>When a <code>$</code> sign is inside a <code>#!html &lt;pre&gt;...&lt;/pre&gt;</code> HTML section, MathJax does not interpret it.</li>
+<li>Use <code>\$</code> to prevent a real \$ to be interpreted.</li>
 </ul>
-</li>
-<li><p>Closely connected to the ABINIT executable:</p>
-<ul>
-<li>CPU-intensive algorithms performed by ABINIT (Fortran + MPI + OpenMP)</li>
-<li>Glue code implemented in python</li>
-</ul>
-</li>
-<li><p>ABINIT and AbiPy communicate through <a href="https://www.unidata.ucar.edu/software/netcdf/docs/">netcdf</a> files</p>
-<ul>
-<li>Portable binary format implemented in C</li>
-<li>Fortran/Python bindings and support for parallel MPI-IO (HDF5)</li>
-<li><a href="https://www.etsf.eu/fileformats">ETSF-IO specifications</a> for crystalline structures, wavefunctions, densities…</li>
-</ul>
-</li>
-</ul>
+<h3 id="In-~abinit/abinit_theme/main.html:">In ~abinit/abinit_theme/main.html:<a class="anchor-link" href="#In-~abinit/abinit_theme/main.html:">&#182;</a></h3><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">async</span> 
+        <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_SVG&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> 
+    <span class="c">&lt;!--</span>
+<span class="c">    Configure MathJax to produce automatic equation numbers http://docs.mathjax.org/en/latest/tex.html</span>
+<span class="c">    --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="p">&gt;</span>
+      <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
+        <span class="nx">TeX</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">equationNumbers</span><span class="o">:</span> <span class="p">{</span> <span class="nx">autoNumber</span><span class="o">:</span> <span class="s2">&quot;AMS&quot;</span> <span class="p">},</span>
+            <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;AMSmath.js&quot;</span><span class="p">],</span>
+            <span class="nx">Macros</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">GG</span><span class="o">:</span> <span class="s2">&quot;{\\bf G}&quot;</span><span class="p">,</span>
+                <span class="nx">kk</span><span class="o">:</span> <span class="s2">&quot;{\\bf k}&quot;</span><span class="p">,</span>
+                <span class="nx">qq</span><span class="o">:</span> <span class="s2">&quot;{\\bf q}&quot;</span><span class="p">,</span>
+                <span class="nx">kq</span><span class="o">:</span> <span class="s2">&quot;{\\kk + \\qq}&quot;</span><span class="p">,</span>
+                <span class="c1">// PAW</span>
+                <span class="nx">tPsi</span><span class="o">:</span> <span class="s2">&quot;{\\tilde\\Psi}&quot;</span><span class="p">,</span>
+                <span class="nx">tpsi</span><span class="o">:</span> <span class="s2">&quot;{\\tilde\\psi}&quot;</span><span class="p">,</span>
+                <span class="nx">tPhi</span><span class="o">:</span> <span class="s2">&quot;{\\tilde\\Phi}&quot;</span><span class="p">,</span>
+                <span class="nx">tphi</span><span class="o">:</span> <span class="s2">&quot;{\\tilde\\phi}&quot;</span><span class="p">,</span>
+                <span class="nx">tprj</span><span class="o">:</span> <span class="s2">&quot;{\\tilde p}&quot;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-install-AbiPy">How to install AbiPy<a class="anchor-link" href="#How-to-install-AbiPy">&#182;</a></h2><!-- From the most simple to the most complex one, you have three options:-->
+<h2 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h2><p>The topic files are written in Markdown and can be found in ~abinit/doc/topics.
+The source files start with an underscore e.g. <code>_AbiPy.md</code>.
+These are <strong>template files</strong> containing the text and two variables:</p>
+<div class="highlight"><pre><span></span><span class="c1">## Related Input Variables</span>
+<span class="o">{{</span> related_variables <span class="o">}}</span>
 
-<p>Using <a href="https://pypi.org/project/pip/">pip</a> and python wheels:</p>
+<span class="c1">## Selected Input Files</span>
+<span class="o">{{</span> selected_input_files <span class="o">}}</span>
+</pre></div>
+<p>that will be filled by <code>./mksite.py</code> by inspecting the database of variables and the tests of the test suite..
+A new Markdown file <strong>without underscore</strong> will be generated and included in <code>mkdocs.yml</code>.</p>
+<p>!!! important</p>
 
-<pre><code>    pip install abipy --user
-
-</code></pre>
-<p>Using <a href="https://conda.io/en/latest/">conda</a> (<em>recommended</em>):</p>
-
-<pre><code>    conda install abipy --channel abinit 
-
-</code></pre>
-<p>From the <a href="https://github.com/abinit/abipy">github repository</a> (<em>develop mode</em>):</p>
-
-<pre><code>    git clone https://github.com/abinit/abipy.git
-    cd abipy 
-    python setup.py develop
-
-</code></pre>
-<!--
-https://pypi.org/project/abipy/
-https://anaconda.org/abinit/abipy
--->
-
-<hr>
-
-<p>For further info see <a href="http://abinit.github.io/abipy/installation.html">http://abinit.github.io/abipy/installation.html</a></p>
+<pre><code>Developers are supposed to edit the version with the underscore and provide enough
+information in the declaration of the variable and in the `TEST_INFO` section
+so that `./mksite.py` can fill the template.
+Remember to restart `./mksite.py` to see the changes.</code></pre>
 
 </div>
 </div>
-</div><aside class="notes">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Why-conda?">Why conda?<a class="anchor-link" href="#Why-conda?">&#182;</a></h2><ul>
-<li><p>Powerful package and environment management system for <u>any programming language</u>.
-Quite popular in the python community. Compatible with <em>pip install</em>.</p>
-</li>
-<li><p>Precompiled libraries ➝ no compilation of C/Fortran/C++ code required:</p>
-
-<pre><code>  conda install netcdf </code></pre>
-</li>
-<li><p>Less headaches when trying to install packages with many dependencies</p>
-</li>
-<li><p><u>Isolated</u> and <u>reproducible</u> environments can be created easily</p>
-</li>
-<li><p>Great tool for developers:</p>
-
-<pre><code>      conda create -n env3.7 python=3.7</code></pre>
-</li>
-<li><p>Most <em>conda</em> packages are friendly across Linux/MacOsX/Windows</p>
-</li>
-<li><p>Tons of packages available on the <a href="https://conda-forge.org/">conda-forge</a> channel</p>
-</li>
-</ul>
-<hr>
-
-<h3 id="If-you&#8217;re-still-not-convinced-about-using-conda...">If you&#8217;re still not convinced about using conda...<a class="anchor-link" href="#If-you&#8217;re-still-not-convinced-about-using-conda...">&#182;</a></h3>
-</div>
-</div>
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-install-Abinit-on-your-laptop-with-conda">How to install Abinit on your laptop with conda<a class="anchor-link" href="#How-to-install-Abinit-on-your-laptop-with-conda">&#182;</a></h2><h4 id="Download-and-install-miniconda-on-your-Linux-machine-with:">Download and install <em>miniconda</em> on your Linux machine with:<a class="anchor-link" href="#Download-and-install-miniconda-on-your-Linux-machine-with:">&#182;</a></h4>
-<pre><code>    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    bash Miniconda3-latest-Linux-x86_64.sh
-
-
-</code></pre>
-<h4 id="Source-your-.bashrc-file-to-activate-the-changes:">Source your <em>.bashrc</em> file to activate the changes:<a class="anchor-link" href="#Source-your-.bashrc-file-to-activate-the-changes:">&#182;</a></h4>
-<pre><code>    source ~/.bashrc
-
-</code></pre>
-<h4 id="Add-conda-forge-to-your-conda-channels:">Add <em>conda-forge</em> to your conda channels:<a class="anchor-link" href="#Add-conda-forge-to-your-conda-channels:">&#182;</a></h4>
-<pre><code>    conda config --add channels conda-forge
-
-</code></pre>
-<h4 id="Install-the-parallel-version-of-abinit-from-the-abinit-channel-with:">Install the parallel version of abinit from the <a href="https://anaconda.org/abinit/abinit">abinit channel</a> with:<a class="anchor-link" href="#Install-the-parallel-version-of-abinit-from-the-abinit-channel-with:">&#182;</a></h4>
-<pre><code>conda install abinit --channel abinit
-
-</code></pre>
-<hr>
-
-<p>Futher info at <a href="https://github.com/abinit/abiconda">https://github.com/abinit/abiconda</a></p>
-
-</div>
-</div>
-</div>
-</aside></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13495,83 +13534,19 @@ Quite popular in the python community. Compatible with <em>pip install</em>.</p>
 </div>
 </div>
 
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Jupyter-notebooks-with-examples-and-lessons">Jupyter notebooks with <a href="https://nbviewer.jupyter.org/github/abinit/abitutorials/blob/master/abitutorials/index.ipynb">examples and lessons</a><a class="anchor-link" href="#Jupyter-notebooks-with-examples-and-lessons">&#182;</a></h2><!-- img src="./assets/abipy_notebooks.png" width="100%" align="center" -->
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">embed</span> https://nbviewer.jupyter.org/github/abinit/abitutorials/blob/master/abitutorials/index.ipynb
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[3]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-        <iframe
-            width="800"
-            height="400"
-            src="https://nbviewer.jupyter.org/github/abinit/abitutorials/blob/master/abitutorials/index.ipynb"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
-        
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-do-we-need-to-automate-calculations?">What do we need to automate calculations?<a class="anchor-link" href="#What-do-we-need-to-automate-calculations?">&#182;</a></h2><ul>
-<li>Tools to parse and analyze output results</li>
-<li>python API to generate input files</li>
-<li><p>High-level logic for:</p>
-<ul>
-<li>Managing complicated workflows</li>
-<li>Exposing task parallelism (independent steps can be executed in parallel)</li>
-<li>Handling runtime errors and restarting calculations</li>
-<li>Saving final results in machine-readable format (e.g. databases)</li>
-</ul>
-</li>
-</ul>
-<p><img src="./assets/sdata201865-f2.jpg" width="50%" align="center"></p>
-<hr>
-
-<h3 id="Let's-discuss-the-different-parts-step-by-step&#8230;">Let's discuss the different parts step by step&#8230;<a class="anchor-link" href="#Let's-discuss-the-different-parts-step-by-step&#8230;">&#182;</a></h3>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./assets/Data-Analysis.jpg" width="95%" align="center"></p>
-
-</div>
-</div>
 </div></section></section>
 </div>
 </div>
