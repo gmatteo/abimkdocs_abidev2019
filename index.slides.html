@@ -1,4 +1,6 @@
-
+<!--
+ http://www.damian.oquanta.info/posts/change-the-ipython-slides-defaults-with-an-ipython-config-file.html
+ -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +18,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <!-- General and theme style sheets -->
-<link rel="stylesheet" href="reveal.js/css/reveal.css">
-<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/reveal.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/theme/simple.css" id="theme">
+<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/theme/simple.css" id="theme"-->
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -25,14 +28,14 @@ if( window.location.search.match( /print-pdf/gi ) ) {
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'reveal.js/css/print/pdf.css';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
 }
 
 </script>
 
 <!--[if lt IE 9]>
-<script src="reveal.js/lib/js/html5shiv.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/lib/js/html5shiv.js"></script>
 <![endif]-->
 
 <!-- Loading the mathjax macro -->
@@ -13233,6 +13236,8 @@ a.anchor-link {
 </head>
 
 
+
+
 <body>
 
 
@@ -13242,7 +13247,8 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Automating-ABINIT-calculations-with-AbiPy">Automating ABINIT calculations with AbiPy<a class="anchor-link" href="#Automating-ABINIT-calculations-with-AbiPy">&#182;</a></h1><h3 id="M.-Giantomassi-and-the-AbiPy-group">M. Giantomassi and the AbiPy group<a class="anchor-link" href="#M.-Giantomassi-and-the-AbiPy-group">&#182;</a></h3><p>Boston MA, 3 March 2019</p>
+<h1 id="Abimkdocs:-the-new-infrastructure-for-the-ABINIT-documentation">Abimkdocs: the new infrastructure for the ABINIT documentation<a class="anchor-link" href="#Abimkdocs:-the-new-infrastructure-for-the-ABINIT-documentation">&#182;</a></h1><h3 id="M.-Giantomassi">M. Giantomassi<a class="anchor-link" href="#M.-Giantomassi">&#182;</a></h3><p>9th international ABINIT developer workshop
+20-22nd May 2019 - Louvain-la-Neuve, Belgium</p>
 <!-- link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme" -->
 
 <p><img src="./assets/intro_logos.png" width="85%" heigh="15%" align="center"></p>
@@ -13263,17 +13269,20 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Why-a-new-infrastructure-for-docs?">Why a new infrastructure for docs?<a class="anchor-link" href="#Why-a-new-infrastructure-for-docs?">&#182;</a></h2><h4 id="Problems">Problems<a class="anchor-link" href="#Problems">&#182;</a></h4><ul>
-<li>Technical documentation is very important but nobody loves writing docs</li>
-<li>Websites use lot of HTML5/Javascript/CSS4 technology</li>
-<li>Abinit developers are more familiar with plain text files and $\LaTeX$</li>
-<li>Users exepct to find an interactive and responsive website </li>
+<h2 id="Why-a-new-infrastructure-for-docs?">Why a new infrastructure for docs?<a class="anchor-link" href="#Why-a-new-infrastructure-for-docs?">&#182;</a></h2><h3 id="Problems">Problems<a class="anchor-link" href="#Problems">&#182;</a></h3><ul>
+<li>Documentation is very important but find me someone who loves writing docs and I will pay you 🍺🍺</li>
+<li>Websites use lot of HTML5, Javascript, and CSS4 technology</li>
+<li>Abinit developers are more familiar with <em>plain text files</em> and $\LaTeX$</li>
+<li>Users expect an interactive and responsive website </li>
+<li>Documentation must be kept in synch with new developments</li>
 </ul>
-<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><ul>
-<li>Use Markdown for documentation files </li>
-<li>Use well-established python frameworks to generate static website from markdown files</li>
-<li>Extend the framework with plugins that can reuse all the python code written for the 
+<h3 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h3><ul>
+<li>Markdown for documentation files </li>
+<li>Python files with the declaration of input variables </li>
+<li>Use well-established python frameworks to generate static website from MD files</li>
+<li>Extend the framework with plugins interfaced with python code written for the 
 TestSuite and the database of input variables</li>
+<li>Connect the different parts with "integration tests" written in python</li>
 </ul>
 
 </div>
@@ -13282,12 +13291,12 @@ TestSuite and the database of input variables</li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Software-stack-(yes,-we-need-libraries)">Software stack (yes, we need libraries)<a class="anchor-link" href="#Software-stack-(yes,-we-need-libraries)">&#182;</a></h2><ul>
+<h2 id="Software-stack-(yes,-it's-2019-and-we-use-libraries)">Software stack (yes, it's 2019 and we use libraries)<a class="anchor-link" href="#Software-stack-(yes,-it's-2019-and-we-use-libraries)">&#182;</a></h2><ul>
 <li><a href="https://github.com/Python-Markdown/markdown">Python Markdown</a></li>
 <li>pygments</li>
 <li>pybtex</li>
 <li>pymdown-extensions</li>
-<li>mkdocs</li>
+<li><a href="http://www.mkdocs.org/">MkDocs</a></li>
 </ul>
 <p>The website is automatically generated with <a href="http://www.mkdocs.org/">MkDocs</a>
 a static site generator geared towards project documentation.
@@ -13331,21 +13340,70 @@ and finally regenerate the website with MkDocs.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-to-build-to-website">How to build to website<a class="anchor-link" href="#How-to-build-to-website">&#182;</a></h3>
-<pre><code>cd ~abinit 
+<p><img src="./assets/mkdocs.jpg" width="45%" align="center"></p>
+<h2 id="What-is-MkDocs?">What is MkDocs?<a class="anchor-link" href="#What-is-MkDocs?">&#182;</a></h2><ul>
+<li>Python-based static site generator that combines Markdown content with Jinja2 
+templates to produce websites</li>
+<li>Source code available on GitHub under the BSD 2-clause license</li>
+<li>Plugin infrastructure to customize logic</li>
+<li>Easy configuration via YAML file </li>
+</ul>
+<p><img src="./assets/mkdocs_files.png" width="35%" align="center"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./assets/static_website_flow.png" width="55%" align="center"></p>
+<ul>
+<li>Contents ⟾ Markdown files  </li>
+<li>Template ⟾ Jinja + Mkdocs-Material theme + lot of HTML techology</li>
+<li>Compile ⟾ Python Mkdocs + our customized logic</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./assets/dynamic_vs_static.jpg" width="65%" align="center"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./assets/mkdocs-features.png" width="35%" align="center">
+<img src="./assets/mkdocs_materials_mobile.png" width="35%" align="center">
+<img src="./assets/mkdocs_materials.jpg" width="35%" align="center"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Installation">Installation<a class="anchor-link" href="#Installation">&#182;</a></h3><div class="highlight"><pre><span></span>pip install -r requirements.txt <span class="o">[</span>--user<span class="o">]</span>
+</pre></div>
+<h3 id="How-to-build-the-website">How to build the website<a class="anchor-link" href="#How-to-build-the-website">&#182;</a></h3><div class="highlight"><pre><span></span><span class="nb">cd</span> ~abinit 
 ./mksite.py serve --dirtyreload
 
 Regenerating database...
 Saving database to /Users/gmatteo/git_repos/abidocs/doc/tests/test_suite.cpkl
-Initial website generation completed in 9.17 [s]
-Generating markdown files with input variables of code: `abinit`...
+Initial website generation completed in <span class="m">9</span>.17 <span class="o">[</span>s<span class="o">]</span>
+Generating markdown files with input variables of code: <span class="sb">`</span>abinit<span class="sb">`</span>...
 ...
 ...
 INFO    -  Building documentation...
 INFO    -  Cleaning site directory
-[I 170826 03:37:05 server:283] Serving on http://127.0.0.1:8000
-[I 170826 03:37:05 handlers:60] Start watching changes
-[I 170826 03:37:05 handlers:62] Start detecting changes</code></pre>
+<span class="o">[</span>I <span class="m">170826</span> <span class="m">03</span>:37:05 server:283<span class="o">]</span> Serving on http://127.0.0.1:8000
+<span class="o">[</span>I <span class="m">170826</span> <span class="m">03</span>:37:05 handlers:60<span class="o">]</span> Start watching changes
+<span class="o">[</span>I <span class="m">170826</span> <span class="m">03</span>:37:05 handlers:62<span class="o">]</span> Start detecting changes
+</pre></div>
 <p>Use --dirtyreload</p>
 <p>Note: Live reloading is not supported in variables, input files. You need to CTRL+C the webserver and restart it.</p>
 
@@ -13355,38 +13413,75 @@ INFO    -  Cleaning site directory
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./assets/mkdocs.jpg" width="55%" align="center"></p>
-<h2 id="What-is-AbiPy?">What is AbiPy?<a class="anchor-link" href="#What-is-AbiPy?">&#182;</a></h2><h4 id="Python-package-for:">Python package for:<a class="anchor-link" href="#Python-package-for:">&#182;</a></h4><ul>
-<li>MkDocs is a Python-based static site generator that combines Markdown content with Jinja2 
-templates to produce websites.</li>
-<li>MkDocs' source code is available on GitHub under the BSD 2-clause license.</li>
-<li>Easy configuration via YAML file </li>
+<h4 id="To-add-a-new-tutorial:">To add a new tutorial:<a class="anchor-link" href="#To-add-a-new-tutorial:">&#182;</a></h4><ul>
+<li>Create a new Markdown file in <em>doc/tutorial</em> </li>
+<li>Register the new page in <code>mkdocs.yml</code> </li>
+<li>Build with <code>./mksite.py serve --dirtyreload</code></li>
 </ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In order to add a new tutorial, create a new Markdown file in doc/tutorial and 
-register it in <code>mkdocs.yml</code> 
-Then, build the HTML using `./mksite.py serve</p>
-<h3 id="Excerpt-of-mkdocs.yml">Excerpt of mkdocs.yml<a class="anchor-link" href="#Excerpt-of-mkdocs.yml">&#182;</a></h3><div class="highlight"><pre><span></span><span class="nt">pages</span><span class="p">:</span>
+<h4 id="Excerpt-of-mkdocs.yml">Excerpt of mkdocs.yml<a class="anchor-link" href="#Excerpt-of-mkdocs.yml">&#182;</a></h4><div class="highlight"><pre><span></span><span class="nt">pages</span><span class="p">:</span>
 <span class="p p-Indicator">-</span> <span class="nt">Tutorial</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="nt">Overview</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/index.md</span>
     <span class="p p-Indicator">-</span> <span class="nt">Base Tutorials</span><span class="p">:</span> 
         <span class="p p-Indicator">-</span> <span class="nt">Base1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base1.md</span>
         <span class="p p-Indicator">-</span> <span class="nt">Base2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base2.md</span>
-        <span class="p p-Indicator">-</span> <span class="nt">Base3</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base3.md</span>
-        <span class="p p-Indicator">-</span> <span class="nt">Base4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base4.md</span>
-        <span class="p p-Indicator">-</span> <span class="nt">Spin</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/spin.md</span>
     <span class="p p-Indicator">-</span> <span class="nt">PAW</span><span class="p">:</span>
         <span class="p p-Indicator">-</span> <span class="nt">PAW1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw1.md</span>
         <span class="p p-Indicator">-</span> <span class="nt">PAW2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw2.md</span>
-        <span class="p p-Indicator">-</span> <span class="nt">PAW3</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw3.md</span>
 </pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="HTML-page:">HTML page:<a class="anchor-link" href="#HTML-page:">&#182;</a></h3><p><img src="./assets/tutorial_yaml_pages.png" width="75%" align="center"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dokuwiki-links">Dokuwiki links<a class="anchor-link" href="#Dokuwiki-links">&#182;</a></h2><p><img src="./assets/dokuwiki_link.jpg" width="25%" align="center"></p>
+<ul>
+<li>Adding HTML refs to internal resources (<em>vars</em>, <em>refs</em>, <em>input files</em>) is boring and error-prone</li>
+<li>Fortunately we have <em>variables_abinit.py</em>, <em>abiref.bib</em> and <em>Test_Suite</em> ⇒ python preprocessor and wikilink syntax</li>
+<li>Wikilink Syntax: <code>[[namespace:name#fragment|text]]</code><ul>
+<li><code>namespace</code> in "cite", "test", "lesson", "tutorial", "src", "pdf", "gitsha" ...</li>
+<li><code>name</code> depends on namespace</li>
+<li>text is the name of the link</li>
+</ul>
+</li>
+</ul>
+<h3 id="It-seems-complicated-but-it's-very-flexible-and-syntax-for-common-cases-is-really-easy:">It seems complicated but it's very flexible and syntax for common cases is really easy:<a class="anchor-link" href="#It-seems-complicated-but-it's-very-flexible-and-syntax-for-common-cases-is-really-easy:">&#182;</a></h3><p><img src="./assets/wikilinks.png" width="95%" align="center"></p>
+<h3 id="Full-documentation-available-here">Full documentation available <a href="https://docs.abinit.org/developers/markdown/#links">here</a><a class="anchor-link" href="#Full-documentation-available-here">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Markdown-example:">Markdown example:<a class="anchor-link" href="#Markdown-example:">&#182;</a></h3><div class="highlight"><pre><span></span>---
+authors: MG, MS
+---
+
+<span class="gu">##</span> Green&#39;s function and self-energy
+
+The time-ordered Green&#39;s function $G(12)$ defines
+the probability amplitude for the propagation of an added or removed electron in a many-body system. 
+
+\begin{equation} 
+G(1,2) = -i\left\langle \Theta_0^N \left| \hat{T} \left[
+\hat{\psi}(1)\hat{\psi}^{\dagger}(2) \right] \right| \Theta_0^N \right\rangle,
+\end{equation}
+</pre></div>
+<h3 id="HTML-result:">HTML result:<a class="anchor-link" href="#HTML-result:">&#182;</a></h3><h2 id="Green's-function-and-self-energy">Green's function and self-energy<a class="anchor-link" href="#Green's-function-and-self-energy">&#182;</a></h2><p>The time-ordered Green's function $G(12)$ defines
+the probability amplitude for the propagation of an added or removed electron in a many-body system.</p>
+\begin{equation} 
+G(1,2) = -i\left\langle \Theta_0^N \left| \hat{T} \left[
+\hat{\psi}(1)\hat{\psi}^{\dagger}(2) \right] \right| \Theta_0^N \right\rangle,
+\end{equation}<p></p>
 
 </div>
 </div>
@@ -13409,13 +13504,17 @@ entries given in the <code>~abinit/doc/abiref.bib</code> file.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="MathJax-integration">MathJax integration<a class="anchor-link" href="#MathJax-integration">&#182;</a></h2><p>Formulas written in LaTeX are interpreted automatically (at visualization time) thanks to the
-<a href="http://docs.mathjax.org/en/latest/mathjax.html">MathJax</a> on-the-flight processor
-while the math extension for Python-Markdown is provided by
-<a href="https://github.com/mitya57/python-markdown-math">python-markdown-math</a>.</p>
+<h2 id="MathJax-integration">MathJax integration<a class="anchor-link" href="#MathJax-integration">&#182;</a></h2><ul>
+<li><p>Formulas written in LaTeX are interpreted automatically (at visualization time) thanks to the
+<a href="http://docs.mathjax.org/en/latest/mathjax.html">MathJax</a> on-the-flight processor</p>
+</li>
+<li><p>Math extension for Python-Markdown is provided by
+<a href="https://github.com/mitya57/python-markdown-math">python-markdown-math</a></p>
+</li>
+</ul>
 <p>Latex equations can be used <strong>everywhere</strong> including the description of the variables
-reported in <code>abinit_vars.yml</code> and the description of the tests gives in the <code>TEST_INFO</code> section.
-For the Abinit documentation, the conventions are:</p>
+reported and the description of the tests gives in the <code>TEST_INFO</code> section.</p>
+<p>For the Abinit documentation, the conventions are:</p>
 <ul>
 <li><code>$...$</code>  yields an <em>onlinecite</em> translation of the LaTeX formula.</li>
 <li><code>$$...$$</code> yields <em>display</em> mode, the LaTeX formula being rendered on one dedicated line (moreover, centered).</li>
@@ -13424,7 +13523,14 @@ within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
 <li>When a <code>$</code> sign is inside a <code>#!html &lt;pre&gt;...&lt;/pre&gt;</code> HTML section, MathJax does not interpret it.</li>
 <li>Use <code>\$</code> to prevent a real \$ to be interpreted.</li>
 </ul>
-<h3 id="In-~abinit/abinit_theme/main.html:">In ~abinit/abinit_theme/main.html:<a class="anchor-link" href="#In-~abinit/abinit_theme/main.html:">&#182;</a></h3><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">async</span> 
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="In-~abinit/abinit_theme/main.html:">In ~abinit/abinit_theme/main.html:<a class="anchor-link" href="#In-~abinit/abinit_theme/main.html:">&#182;</a></h4><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">async</span> 
         <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_SVG&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> 
     <span class="c">&lt;!--</span>
@@ -13458,9 +13564,31 @@ within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h2><p>The topic files are written in Markdown and can be found in ~abinit/doc/topics.
-The source files start with an underscore e.g. <code>_AbiPy.md</code>.
-These are <strong>template files</strong> containing the text and two variables:</p>
+<h2 id="Permalinks">Permalinks<a class="anchor-link" href="#Permalinks">&#182;</a></h2><h4 id="From-Wikipedia:">From Wikipedia:<a class="anchor-link" href="#From-Wikipedia:">&#182;</a></h4><blockquote><p>A permalink is a URL that is intended to remain unchanged for many years into the future, yielding a hyperlink that is less susceptible to link rot.</p>
+</blockquote>
+<h4 id="Permalinks-are-useful-to-create/share-links-to:">Permalinks are useful to create/share links to:<a class="anchor-link" href="#Permalinks-are-useful-to-create/share-links-to:">&#182;</a></h4><ul>
+<li>tutorials, sections in docs, input variables, input files in TestSuite</li>
+</ul>
+<h4 id="Permalinks-are-automaticaly-generated-from:">Permalinks are automaticaly generated from:<a class="anchor-link" href="#Permalinks-are-automaticaly-generated-from:">&#182;</a></h4><ul>
+<li>tutorial filename and section name</li>
+<li>(varset, varname) if variable</li>
+<li>Markdown filepath and section name if doc</li>
+<li>Location of input file if test</li>
+</ul>
+<p>Nothing is written in stone but try to avoid link rot as much as possible</p>
+<p>Example: Lot of hrefs in Abinit2019 paper will rot if you start to rename input files for "cosmetic reasons"</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Topic-Files">Topic Files<a class="anchor-link" href="#Topic-Files">&#182;</a></h2><ul>
+<li>The topic files are written in Markdown and can be found in ~abinit/doc/topics.</li>
+<li>Filename starts with an underscore e.g. <code>_AbiPy.md</code>.</li>
+<li>These are <strong>template files</strong> containing the text and two variables:</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="c1">## Related Input Variables</span>
 <span class="o">{{</span> related_variables <span class="o">}}</span>
 
@@ -13482,16 +13610,12 @@ Remember to restart `./mksite.py` to see the changes.</code></pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="AbiPy-documentation">AbiPy documentation<a class="anchor-link" href="#AbiPy-documentation">&#182;</a></h2><!--
-* http://abinit.github.io/abipy/index.html
+<h2 id="Input-variables">Input variables<a class="anchor-link" href="#Input-variables">&#182;</a></h2><ul>
+<li>Declared in python files </li>
+<li>Grouped by code <em>~abinit/abimkdocs/variables_abinit.py</em></li>
+<li></li>
+</ul>
 
-* Jupyter notebooks 
-* Gallery of matplotlib examples and flows
-* abitutorial github repo with additional examples
-
-
-<img src="./assets/abipy_doc_homepage.png" width="100%" align="center">
--->
 </div>
 </div>
 </div>
@@ -13534,19 +13658,25 @@ Remember to restart `./mksite.py` to see the changes.</code></pre>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="UnitTests">UnitTests<a class="anchor-link" href="#UnitTests">&#182;</a></h2><ul>
+<li>Typos detected at runtime by mksite (check WARNINGs)</li>
+<li>Tested on abiref bot (mksite section)</li>
+<li>Linkcheck detects broken links </li>
+</ul>
 
-    </div>
 </div>
 </div>
-
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2>
+</div>
+</div>
 </div></section></section>
 </div>
 </div>
@@ -13560,8 +13690,8 @@ require(
       waitSeconds: 15
     },
     [
-      "reveal.js/lib/js/head.min.js",
-      "reveal.js/js/reveal.js"
+      "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/lib/js/head.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/js/reveal.js"
     ],
 
     function(head, Reveal){
@@ -13576,9 +13706,9 @@ require(
 
             // Optional libraries used to extend on reveal.js
             dependencies: [
-                { src: "reveal.js/lib/js/classList.js",
+                { src: "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/lib/js/classList.js",
                   condition: function() { return !document.body.classList; } },
-                { src: "reveal.js/plugin/notes/notes.js",
+                { src: "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/plugin/notes/notes.js",
                   async: true,
                   condition: function() { return !!document.body.classList; } }
             ]
@@ -13615,6 +13745,65 @@ require(
 </script>
 
 </body>
+
+
+
+<!-- script>
+Reveal.initialize({
+
+    // <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+    // Display controls in the bottom right corner
+    //controls: true,
+
+    // Display a presentation progress bar
+    progress: true,
+
+    // Push each slide change to the browser history
+    //history: false,
+
+    // Enable keyboard shortcuts for navigation
+    //keyboard: true,
+
+    // Enable touch events for navigation
+    //touch: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: true,
+
+    // Loop the presentation
+    //loop: false,
+
+    // Change the presentation direction to be RTL
+    //rtl: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    //autoSlide: 0,
+
+    slideNumber: true,
+
+    // Enable slide navigation via mouse wheel
+    //mouseWheel: false,
+
+    // Transition style default/cube/page/concave/zoom/linear/fade/none
+    transition: 'concave',
+    //transition: 'page',
+
+    // Transition speed
+    //transitionSpeed: 'default', // default/fast/slow
+
+    // Transition style for full page backgrounds
+    //backgroundTransition: 'default', // default/linear/none
+
+    // Theme
+    //theme: 'blood' // available themes are in /css/theme
+});
+
+</script -->
 
 
 </html>
