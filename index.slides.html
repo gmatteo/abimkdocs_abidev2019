@@ -13273,13 +13273,13 @@ a.anchor-link {
 <li>Websites use lot of HTML5/Javascript/CSS technology but we are more familiar with 
 <u>plain text</u> files and $\LaTeX$</li>
 <li>Modern websites are <u>interactive</u> and <u>responsive</u> (layout adjusts to screen size)</li>
-<li>Documentation should be put under version control (need git-friendly format) and kept in synch 
-with new developments </li>
+<li>Doc files should be mainted in synch with new developments</li>
+<li>Doc files are under version control hence we need a git-friendly format to facilitate code-reviewing</li>
 </ul>
 <h3 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h3><ul>
-<li>Markdown (MD) for documentation files </li>
-<li>Python files for documenting input variables (including metavariables) </li>
-<li>Python framework to generate static website from MD files</li>
+<li>Use Markdown (MD) for documentation files </li>
+<li>Use python objects to represent input variables (including metadata) </li>
+<li>Employ Python framework to generate static website from MD files</li>
 <li>Extend the framework with plugins based on the python code already developed for the <em>TestSuite/InputVariables</em></li>
 </ul>
 
@@ -13289,7 +13289,7 @@ with new developments </li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Software-stack-(we-are-not-web-developers-&#8658;-we-need-libraries)">Software stack (we are not web-developers &#8658; we need libraries)<a class="anchor-link" href="#Software-stack-(we-are-not-web-developers-&#8658;-we-need-libraries)">&#182;</a></h2><h4 id="Python">Python<a class="anchor-link" href="#Python">&#182;</a></h4><ul>
+<h2 id="Software-stack-(we-are-not-web-developers-&#8658;-we-need-&#129497;-libraries)">Software stack (we are not web-developers &#8658; we need &#129497; libraries)<a class="anchor-link" href="#Software-stack-(we-are-not-web-developers-&#8658;-we-need-&#129497;-libraries)">&#182;</a></h2><h4 id="Python">Python<a class="anchor-link" href="#Python">&#182;</a></h4><ul>
 <li><a href="https://github.com/Python-Markdown/markdown">Python Markdown</a> to parse the Markdown documentation</li>
 <li><a href="https://facelessuser.github.io/pymdown-extensions/">pymdown-extensions</a> to extend Markdown syntax</li>
 <li><a href="https://pybtex.org/">pybtex</a>: BibTeX-compatible bibliography processor written in Python</li>
@@ -13390,7 +13390,7 @@ to install the python packages in user mode.
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<center><img src="./assets/dynamic_vs_static.jpg" width="70%" align="center"></center><ul>
+<center><img src="./assets/dynamic_vs_static.jpg" width="75%" align="center"></center><ul>
 <li><em>Static website</em> means that the server serves <u>pre-built</u> HTML pages:<ul>
 <li>easier to implement than dynamic websites</li>
 <li>safer (no code running on the server)</li>
@@ -13512,18 +13512,13 @@ plotly: true
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dokuwiki-links">Dokuwiki links<a class="anchor-link" href="#Dokuwiki-links">&#182;</a></h2><!-- 
-<p><img src="./assets/dokuwiki_link.jpg" width="3%"></p> 
-* Fortunately we have *variables_abinit.py*, *abiref.bib* and *Test_Suite* ⇒ python preprocessor and wikilink syntax
--->
-
-<ul>
+<h2 id="Dokuwiki-links">Dokuwiki links<a class="anchor-link" href="#Dokuwiki-links">&#182;</a></h2><ul>
 <li>Creating links to external resources is easy: <code>[See here](http://bfy.tw/P9e)</code></li>
 <li>Inserting links to internal resources (<em>vars</em>, <em>bibtex</em>, <em>input files</em>) is <u>boring</u> and <u>error-prone</u></li>
 </ul>
 <h3 id="Solution-for-internal-links:">Solution for internal links:<a class="anchor-link" href="#Solution-for-internal-links:">&#182;</a></h3><ul>
 <li>Extend the markdown parser to support <code>[[token]]</code> regex</li>
-<li>The extension will interpret <em>token</em> to generate the link (🐍 🧙)</li>
+<li>The 🐍extension will interpret <em>token</em> to generate the link</li>
 <li><p>Syntax: <code>[[namespace:name#fragment|text]]</code></p>
 <ul>
 <li><em>namespace</em> defines the context e.g.  <em>cite</em>, <em>test</em>, <em>tutorial</em>, <em>pdf</em>, <em>gitsha</em>...</li>
@@ -13574,7 +13569,7 @@ associated to different executables!
 <li>To have the equations numbered, use the display mode above, and (inside the markers) declare your equation
 within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
 </ul>
-
+<h4 id="List-of-macros-for-common-symbols-defined-in-jinja-template...">List of macros for common symbols defined in jinja template...<a class="anchor-link" href="#List-of-macros-for-common-symbols-defined-in-jinja-template...">&#182;</a></h4>
 </div>
 </div>
 </div></section><section>
@@ -13626,7 +13621,7 @@ within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="An-example-of-variable-with-table-in-MD-format">An example of variable with table in MD format<a class="anchor-link" href="#An-example-of-variable-with-table-in-MD-format">&#182;</a></h2><p></p><div class="highlight"><pre><span></span><span class="n">Variable</span><span class="p">(</span>
+<h2 id="An-example-of-Abinit-variable-containing-a-table-in-MD-format">An example of Abinit variable containing a table in MD format<a class="anchor-link" href="#An-example-of-Abinit-variable-containing-a-table-in-MD-format">&#182;</a></h2><p></p><div class="highlight"><pre><span></span><span class="n">Variable</span><span class="p">(</span>
     <span class="n">abivarname</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span>
     <span class="n">varset</span><span class="o">=</span><span class="s2">&quot;basic&quot;</span><span class="p">,</span>
     <span class="n">vartype</span><span class="o">=</span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
@@ -13840,7 +13835,6 @@ To create a button that opens a dialog containing the input file, use:
 <span class="x">description: How to to perform a Δ-SCF calculation of neutral excitations</span>
 <span class="x">authors: FJ</span>
 <span class="x">---</span>
-<span class="x">&lt;!--- This is the source file for this topics. Can be edited. --&gt;</span>
 
 <span class="x">This page gives hints on how to to perform a Δ-SCF calculation of neutral excitations.</span>
 
@@ -13851,14 +13845,18 @@ To create a button that opens a dialog containing the input file, use:
 <span class="x">experimental neutral excitations. See e.g. [[cite:Jia2017]].</span>
 
 <span class="x">## Related Input Variables</span>
-<span class="cp">{{</span> <span class="nv">related_variables</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x"> </span><span class="cp">{{</span> <span class="nv">related_variables</span> <span class="cp">}}</span><span class="x"></span>
 
 <span class="x">## Selected Input Files</span>
-<span class="cp">{{</span> <span class="nv">selected_input_files</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x"> </span><span class="cp">{{</span> <span class="nv">selected_input_files</span> <span class="cp">}}</span><span class="x"></span>
 </pre></div>
-<p>The template be filled by <em>mksite.py</em> by inspecting the database of variables 
-and the TEST_INFO section in <em>TestSuite</em>.</p>
-<p>A new Markdown file <strong>without underscore</strong> will be generated and included automagically in <em>mkdocs.yml</em></p>
+<hr>
+
+<ul>
+<li>The template be filled by <em>mksite.py</em> by inspecting the database of variables 
+and the TEST_INFO section in <em>TestSuite</em>.</li>
+<li>A new Markdown file <strong>without underscore</strong> will be generated and included automagically in <em>mkdocs.yml</em></li>
+</ul>
 <div class="alert alert-warning" role="alert">
     Developers should edit the version with the underscore and provide enough
     information in the declaration of the variable and in the `TEST_INFO` section
@@ -13906,19 +13904,6 @@ so, please, build the website on your machine before <em>git push</em>!</p>
 -->
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div></section></section>
 </div>
 </div>
