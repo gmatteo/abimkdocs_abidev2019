@@ -13255,10 +13255,8 @@ a.anchor-link {
 <hr> 
 
 <ul>
-<li><p>These slides have been generated using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>, <a href="https://jupyter.org">jupyter</a>, <a href="https://github.com/jupyter/nbconvert">nbconvert</a> and <a href="https://revealjs.com/">revealjs</a></p>
-</li>
-<li><p>The notebook can be downloaded from this <a href="https://github.com/gmatteo/abimkdocs_abidev2019">github repo</a></p>
-</li>
+<li>These slides have been generated using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>, <a href="https://jupyter.org">jupyter</a>, <a href="https://github.com/jupyter/nbconvert">nbconvert</a> and <a href="https://revealjs.com/">revealjs</a></li>
+<li>The notebook can be downloaded from this <a href="https://github.com/gmatteo/abimkdocs_abidev2019">github repo</a></li>
 </ul>
 <p>Use the Space key to navigate through all slides.</p>
 
@@ -13274,13 +13272,13 @@ a.anchor-link {
 <u>plain text</u> files and $\LaTeX$</li>
 <li>Modern websites are <u>interactive</u> and <u>responsive</u> (layout adjusts to screen size)</li>
 <li>Doc files should be mainted in synch with new developments</li>
-<li>Doc files are under version control hence we need a git-friendly format to facilitate code-reviewing</li>
+<li>Need git-friendly format to facilitate code-merge and code-reviewing</li>
 </ul>
 <h3 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h3><ul>
 <li>Use Markdown (MD) for documentation files </li>
-<li>Use python objects to represent input variables (including metadata) </li>
-<li>Employ Python framework to generate static website from MD files</li>
-<li>Extend the framework with plugins based on the python code already developed for the <em>TestSuite/InputVariables</em></li>
+<li>Use python objects to represent input variables (including <em>metadata</em>) </li>
+<li>Employ python framework to generate static website from MD files</li>
+<li>Extend the framework with plugins based on the code developed for <em>TestSuite/InputVariables</em></li>
 </ul>
 
 </div>
@@ -13289,7 +13287,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Software-stack-(we-are-not-web-developers-&#8658;-we-need-&#129497;-libraries)">Software stack (we are not web-developers &#8658; we need &#129497; libraries)<a class="anchor-link" href="#Software-stack-(we-are-not-web-developers-&#8658;-we-need-&#129497;-libraries)">&#182;</a></h2><h4 id="Python">Python<a class="anchor-link" href="#Python">&#182;</a></h4><ul>
+<h2 id="Software-stack">Software stack<a class="anchor-link" href="#Software-stack">&#182;</a></h2><h3 id="Python">Python<a class="anchor-link" href="#Python">&#182;</a></h3><ul>
 <li><a href="https://github.com/Python-Markdown/markdown">Python Markdown</a> to parse the Markdown documentation</li>
 <li><a href="https://facelessuser.github.io/pymdown-extensions/">pymdown-extensions</a> to extend Markdown syntax</li>
 <li><a href="https://pybtex.org/">pybtex</a>: BibTeX-compatible bibliography processor written in Python</li>
@@ -13297,7 +13295,7 @@ a.anchor-link {
 <li><a href="http://www.mkdocs.org/">MkDocs</a>: Static site generator geared towards project documentation</li>
 </ul>
 <p>Dependencies listed in <em>~abinit/requirements.txt</em>. Must be installed manually with <em>pip</em></p>
-<h4 id="Javascript-(JS),-CSS,-HTML-...">Javascript (JS), CSS, HTML ...<a class="anchor-link" href="#Javascript-(JS),-CSS,-HTML-...">&#182;</a></h4><ul>
+<h3 id="Javascript-(JS),-CSS,-HTML-...">Javascript (JS), CSS, HTML ...<a class="anchor-link" href="#Javascript-(JS),-CSS,-HTML-...">&#182;</a></h3><ul>
 <li><a href="https://www.mathjax.org/">MathJax</a> for equations in $\LaTeX$</li>
 <li><a href="http://squidfunk.github.io/mkdocs-material/">Mkdocs-Material</a>: a theme built using Google's <a href="https://www.google.com/design/spec/material-design">Material Design</a> guidelines</li>
 <li><a href="http://getbootstrap.com/">Bootstrap</a>: a popular HTML, CSS, and Javascript framework </li>
@@ -13358,13 +13356,14 @@ to install the python packages in user mode.
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <center><img src="./assets/mkdocs.jpg" width="30%" align="center"></center><ul>
-<li><u>Static site</u> generator that combines Markdown content and Jinja2 templates to produce websites</li>
+<li><u>Static site</u> generator that combines MD files and Jinja2 templates to produce websites</li>
 <li>Python project hosted on GitHub: <strong>7617</strong> stars, <strong>1137</strong> forks, BSD2 license</li>
 <li>The built-in server allows you to preview the HTML page as you're writing it</li>
 <li>Plugin infrastructure to extend and customize the framework 🚀</li>
 <li>Easy configuration via YAML file 🎉🎉</li>
 </ul>
-<center><img src="./assets/mkdocs_files.png" width="40%" align="center"></center><p>Information about the order, title, and nesting of each page in the navigation header in <em>mkdocs.yml</em>:</p>
+<center><img src="./assets/mkdocs_files.png" width="40%" align="center"></center><p>Information about the order, title, and nesting of each page in the navigation header specified 
+in <em>mkdocs.yml</em>:</p>
 <p></p><div class="highlight"><pre><span></span><span class="nt">site_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">abinit</span>
 
 <span class="nt">pages</span><span class="p">:</span>
@@ -13380,8 +13379,8 @@ to install the python packages in user mode.
 <div class="text_cell_render border-box-sizing rendered_html">
 <center><img src="./assets/static_website_flow.png" width="45%" align="center"></center><ul>
 <li>Contents ⟾ Markdown files  </li>
-<li>Template ⟾ Jinja + Mkdocs-Material theme + lot of HTML/JS/CSS techology</li>
-<li>Compile ⟾ Python Mkdocs + our customized logic</li>
+<li>Template ⟾ Jinja + Mkdocs-Material theme and lot of HTML/JS/CSS techology</li>
+<li>Compile ⟾ Python Mkdocs + our <strong>customized</strong> logic (plugins)</li>
 </ul>
 <center><img src="./assets/plugin_diagram.png" width="55%" align="center"></center>
 </div>
@@ -13404,7 +13403,7 @@ to install the python packages in user mode.
 </ul>
 </li>
 </ul>
-<p>Good news: we don't need to master all this stuff, we mainly interact with MD extensions 🙌</p>
+<p>Good news: we don't need to master all this stuff, we mainly interact with MD extensions</p>
 
 </div>
 </div>
@@ -13456,7 +13455,6 @@ You have to restart the webserver to see the changes.
         <span class="p p-Indicator">-</span> <span class="nt">Base2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/base2.md</span>
     <span class="p p-Indicator">-</span> <span class="nt">PAW</span><span class="p">:</span>
         <span class="p p-Indicator">-</span> <span class="nt">PAW1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw1.md</span>
-        <span class="p p-Indicator">-</span> <span class="nt">PAW2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial/paw2.md</span>
 </pre></div>
 <h4 id="MD-files-start-with-a-Yaml-section-providing-metavariables-used-by-the-framework:">MD files start with a Yaml section providing metavariables used by the framework:<a class="anchor-link" href="#MD-files-start-with-a-Yaml-section-providing-metavariables-used-by-the-framework:">&#182;</a></h4><p><p></p></p>
 <div class="highlight"><pre><span></span>$ head ~abinit/doc/developers/markdown.md
@@ -13465,6 +13463,8 @@ You have to restart the webserver to see the changes.
 authors: MG, XG
 plotly: true
 ---
+
+Metavariables are stored in page.meta
 </pre></div>
 
 </div>
@@ -13518,7 +13518,7 @@ plotly: true
 </ul>
 <h3 id="Solution-for-internal-links:">Solution for internal links:<a class="anchor-link" href="#Solution-for-internal-links:">&#182;</a></h3><ul>
 <li>Extend the markdown parser to support <code>[[token]]</code> regex</li>
-<li>The 🐍extension will interpret <em>token</em> to generate the link</li>
+<li>The extension will interpret <em>token</em> to generate the link</li>
 <li><p>Syntax: <code>[[namespace:name#fragment|text]]</code></p>
 <ul>
 <li><em>namespace</em> defines the context e.g.  <em>cite</em>, <em>test</em>, <em>tutorial</em>, <em>pdf</em>, <em>gitsha</em>...</li>
@@ -13535,7 +13535,7 @@ plotly: true
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<center><img src="./assets/wikilinks.png" width="80%" align="center"></center><div class="alert alert-danger" role="alert">
+<center><img src="./assets/wikilinks.png" width="75%" align="center"></center><div class="alert alert-danger" role="alert">
 anaddb:dipdip or dipdip@anaddb syntax is needed because we have variables with the same name 
 associated to different executables!
 </div>
@@ -13545,7 +13545,7 @@ associated to different executables!
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Other-examples-wth-namespace">Other examples wth <em>namespace</em><a class="anchor-link" href="#Other-examples-wth-namespace">&#182;</a></h2><p></p><center><img src="./assets/dokuwiki_namespace.png" width="65%" align="center"></center><h3 id="Full-documentation-available-here">Full documentation available <a href="https://docs.abinit.org/developers/markdown/#links">here</a><a class="anchor-link" href="#Full-documentation-available-here">&#182;</a></h3>
+<h2 id="Other-examples-with-namespace">Other examples with <em>namespace</em><a class="anchor-link" href="#Other-examples-with-namespace">&#182;</a></h2><p></p><center><img src="./assets/dokuwiki_namespace.png" width="65%" align="center"></center><h3 id="Full-documentation-available-here">Full documentation available <a href="https://docs.abinit.org/developers/markdown/#links">here</a><a class="anchor-link" href="#Full-documentation-available-here">&#182;</a></h3>
 </div>
 </div>
 </div></section></section><section><section>
@@ -13557,7 +13557,7 @@ associated to different executables!
 <a href="http://docs.mathjax.org/en/latest/mathjax.html">MathJax</a> processor</li>
 <li>Extension for Python-Markdown provided by
 <a href="https://github.com/mitya57/python-markdown-math">python-markdown-math</a></li>
-<li>MathJax configuration defined in Jinja template</li>
+<li>MathJax configuration defined in the Jinja template</li>
 </ul>
 <h4 id="Latex-equations-can-be-used-everywhere-including:">Latex equations can be used <strong>everywhere</strong> including:<a class="anchor-link" href="#Latex-equations-can-be-used-everywhere-including:">&#182;</a></h4><ul>
 <li>the description of the input variables (<em>text</em> entry)</li>
@@ -13611,10 +13611,51 @@ within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Input-variables">Input variables<a class="anchor-link" href="#Input-variables">&#182;</a></h2><ul>
-<li>Declared in python files (e.g. <em>~abinit/abimkdocs/variables_abinit.py</em>)</li>
-<li>Grouped by code </li>
+<li>List of <em>Variable</em> objects declared in python modules</li>
+<li>One module per code (e.g. <em>~abinit/abimkdocs/variables_abinit.py</em>)</li>
+<li>Python API to access variables (used for generating links and HTML)<p></p></li>
 </ul>
+<div class="highlight"><pre><span></span><span class="c1"># Build database with all input variables indexed by code name.</span>
+<span class="n">codevars</span> <span class="o">=</span> <span class="n">get_codevars</span><span class="p">()</span>
+<span class="n">ecut_var</span> <span class="o">=</span> <span class="n">codevars</span><span class="p">[</span><span class="s2">&quot;abinit&quot;</span><span class="p">][</span><span class="s2">&quot;ecut&quot;</span><span class="p">]</span> 
 
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">codevars</span><span class="o">.</span><span class="n">iter_allvars</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Metadata:&quot;</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">varset</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Documentation in MD format:&quot;</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/variables/</span><span class="si">%s</span><span class="s2">#</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">varset</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+<p></p>
+Correspondence between vars and topics in TEST_INFO computed dynamically
+<p></p><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">all_abinit_tests</span><span class="p">:</span>
+    <span class="n">vd</span> <span class="o">=</span> <span class="n">codevars</span><span class="p">[</span><span class="n">test</span><span class="o">.</span><span class="n">executable</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">vname</span> <span class="ow">in</span> <span class="n">test</span><span class="o">.</span><span class="n">get_varnames</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">vd</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">vd</span><span class="p">[</span><span class="n">vname</span><span class="p">]</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+<!--
+       # Find variables used in tests. 
+       for test in tests:
+            vd = self.codevars.get(test.executable, None)
+            # Not all codes have variables documented in the database e.g. multibinit
+            if vd is None:
+                if test.executable not in codes_without_vars:
+                    codes_without_vars.add(test.executable)
+                    if test.executable not in white_list:
+                        cprint("WARNING: Cannot find variables associated to code: `%s`" % test.executable, "yellow")
+                continue
+            for vname in test_get_varnames(test, list(vd.keys())):
+                var = vd[vname]
+                var.tests.append(test)
+
+* abivarname
+The name of the variable. Note that the name for input variables of the executables anaddb, aim and optic is always finished with @anaddb, @aim or @optic.
+topics
+A string, specified in topics_and_relevances
+varset: a unique “set of variables” to which the variable belong. To be chosen among the names in ~abinit/doc/input_variables/origin_files/varsets.yml.
+vartype
+to be chosen among integer, real or string If there is no information of a type for a specific variable, its value must be “null”.
+All the gory details at <https://docs.abinit.org/developers/abimkdocs/#variable-object>
+-->
 </div>
 </div>
 </div></section><section>
@@ -13630,8 +13671,7 @@ within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
     <span class="n">defaultval</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">mnemonics</span><span class="o">=</span><span class="s2">&quot;ACCURACY&quot;</span><span class="p">,</span>
     <span class="n">text</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Allows to tune the accuracy of a calculation by setting automatically the</span>
-<span class="s2">variables according to the following table:</span>
+<span class="s2">Allows to tune the accuracy of a calculation according to the following table:</span>
 
 <span class="s2">accuracy         | 1         | 2          | 3            | 4         </span>
 <span class="s2">---              |---        |---         |---           |---        </span>
@@ -13647,8 +13687,9 @@ within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
 <ul>
 <li><em>varset</em> ➜ each variable belongs to a set</li>
 <li><em>topics</em> ➜ this variable is associated to two topics. Convention: <em>topicname_level</em></li>
-<li><em>text</em> is a python string that will be passed to our customized MD parser </li>
+<li><em>text</em> is a python string that will be passed to our customized MD parser</li>
 </ul>
+<p>All the gory details at <a href="https://docs.abinit.org/developers/abimkdocs/#variable-object">https://docs.abinit.org/developers/abimkdocs/#variable-object</a></p>
 
 </div>
 </div>
@@ -13656,28 +13697,15 @@ within the standard <code>\begin{equation}...\end{equation}</code> markers.</li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Bibliographic-References">Bibliographic References<a class="anchor-link" href="#Bibliographic-References">&#182;</a></h2><p>[[cite:Amadon2008]]</p>
-<ul>
-<li>Bibliographic references are in bibtex format and stored in <em>~abinit/doc/abiref.bib</em></li>
-<li>Entries should provide enough information so that the python code
-can generate appropriate links in the website.</li>
+<h2 id="Bibliographic-References">Bibliographic References<a class="anchor-link" href="#Bibliographic-References">&#182;</a></h2><ul>
+<li>Bibliographic references are in <em>bibtex</em> format and stored in <em>~abinit/doc/abiref.bib</em></li>
+<li>Entries should provide DOI and URL (if available) so that python can generate the appropriate link</li>
+<li>Use <em>FirstAuthorYear</em> for the key</li>
+<li>A letter might be added in case of conflicts: e.g. <em>Amadon2008a</em></li>
 </ul>
-<p>For published work with a DOI, we strongly recommend <em>avoiding</em> a <em>cut&amp;paste</em> from your own bibtex file
-to the central bibliography database. 
-Indeed, there are units tests to enforce the presence of particular entries in the bibtex document and
-your bibtex may not fulfill these requirements.</p>
-<p>Providing bibtex data from the publisher site is a better method.
-If you know the DOI of the article, it is also possible to use <a href="https://github.com/nschloe/betterbib">BetterBib</a>
-to fetch data from <a href="http://www.crossref.org/">Crossref</a> and produce the bibtex entry.
-BetterBib is available from the Python Package Index, so simply type:</p>
-
-<pre><code>pip install betterbib
-
-</code></pre>
-<p>and then use <code>doi2bibtex</code> from the command line:</p>
 <div class="highlight"><pre><span></span>betterbib-doi2bibtex 10.1103/PhysRevLett.96.066402
 
-@article<span class="nb">{</span>bibtex,
+@article<span class="nb">{</span>Amadon2008,
   author = <span class="nb">{</span>Amadon, B. and Biermann, S. and Georges, A. and Aryasetiawan, F.<span class="nb">}</span>,
   doi = <span class="nb">{</span>10.1103/physrevlett.96.066402<span class="nb">}</span>,
   issn = <span class="nb">{</span>0031-9007, 1079-7114<span class="nb">}</span>,
@@ -13691,21 +13719,36 @@ BetterBib is available from the Python Package Index, so simply type:</p>
   volume = <span class="nb">{</span>96<span class="nb">}</span>,
   year = <span class="nb">{</span>2006<span class="nb">}</span>
 <span class="nb">}</span>
+
+[[cite:Amadon2008]]
 </pre></div>
-<p>Add the entry to the bibtex file and use the <code>FirstAuthorYear</code> convention for the key
-(make sure it's not a duplicated entry).
+<!--
+For published work with a DOI, we strongly recommend *avoiding* a *cut&paste* from your own bibtex file
+to the central bibliography database. 
+Indeed, there are units tests to enforce the presence of particular entries in the bibtex document and
+your bibtex may not fulfill these requirements.
+
+Providing bibtex data from the publisher site is a better method.
+If you know the DOI of the article, it is also possible to use [BetterBib](https://github.com/nschloe/betterbib)
+to fetch data from [Crossref](http://www.crossref.org/) and produce the bibtex entry.
+BetterBib is available from the Python Package Index, so simply type:
+
+    pip install betterbib
+
+and then use `doi2bibtex` from the command line:
 Note that the bibtex ID must be of the form "FirstauthornameYEAR", e.g. "Amadon2008"
 (start with an uppercase letter, then lower case, then four-digit year).
-Possibly, a letter might be added in case of ambiguity: e.g. there exists also <code>Amadon2008a</code>
-Then, build the HTML pages using <code>./mksite.py serve</code>.</p>
-<p>Run the tests with:</p>
 
-<pre><code>pytest abimkdocs_tests/test_bibtex.py
+Then, build the HTML pages using `./mksite.py serve`.
 
-</code></pre>
-<p>with pytest to validate your changes.</p>
-<p>Use the "cite" namespace to refer to a bibliography entry.</p>
+Run the tests with:
 
+    pytest abimkdocs_tests/test_bibtex.py
+
+with pytest to validate your changes.
+
+Use the "cite" namespace to refer to a bibliography entry.
+-->
 </div>
 </div>
 </div></section><section>
@@ -13756,7 +13799,8 @@ Then, build the HTML pages using <code>./mksite.py serve</code>.</p>
   the future, yielding a hyperlink that is less susceptible to link rot (<em>wikipedia</em>)</p>
 </blockquote>
 <h4 id="Permalinks-are-useful-to-create/share-links-to:">Permalinks are useful to create/share links to:<a class="anchor-link" href="#Permalinks-are-useful-to-create/share-links-to:">&#182;</a></h4><ul>
-<li>tutorials, sections in docs, input variables, input files, talks like this one</li>
+<li>tutorials and sections in pages</li>
+<li>input variables, input files and talks like this one</li>
 </ul>
 <h4 id="Permalinks-are-automaticaly-generated-from:">Permalinks are automaticaly generated from:<a class="anchor-link" href="#Permalinks-are-automaticaly-generated-from:">&#182;</a></h4><ul>
 <li>(<em>varset</em>, <em>varname</em>) if variable</li>
@@ -13764,8 +13808,8 @@ Then, build the HTML pages using <code>./mksite.py serve</code>.</p>
 <li>Location of input file for tests</li>
 </ul>
 <h4 id="Nothing-is-written-in-stone-but-try-to-avoid-link-rot-as-much-as-possible">Nothing is written in stone but try to avoid link rot as much as possible<a class="anchor-link" href="#Nothing-is-written-in-stone-but-try-to-avoid-link-rot-as-much-as-possible">&#182;</a></h4><div class="alert alert-danger" role="alert">
-  Lot of hrefs in the Abinit2019 paper will rot if you start to rename input files just 
-for "cosmetic reasons". Keep this in mind!
+Lot of hrefs in the Abinit2019 paper will rot if you start to rename input files or section names 
+just for "cosmetic reasons". Keep this in mind!
 </div>
 </div>
 </div>
@@ -13829,14 +13873,14 @@ To create a button that opens a dialog containing the input file, use:
 <h2 id="Topic-Files">Topic Files<a class="anchor-link" href="#Topic-Files">&#182;</a></h2><ul>
 <li>Topic files are written in MD and can be found in <em>~abinit/doc/topics</em></li>
 <li>Filename starts with an underscore e.g. <code>_AbiPy.md</code>.</li>
-<li>These are <strong>template files</strong> containing the MD content and two <code>{{ variables }}</code>:<p></p></li>
+<li>These are <strong>template files</strong> containing the MD content and two <code>{{ variables }}</code>:</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="x">---</span>
 <span class="x">description: How to to perform a Δ-SCF calculation of neutral excitations</span>
 <span class="x">authors: FJ</span>
 <span class="x">---</span>
 
-<span class="x">This page gives hints on how to to perform a Δ-SCF calculation of neutral excitations.</span>
+<span class="x">Hints on how to to perform a Δ-SCF calculation of neutral excitations.</span>
 
 <span class="x">## Introduction</span>
 
@@ -13853,16 +13897,17 @@ To create a button that opens a dialog containing the input file, use:
 <hr>
 
 <ul>
-<li>The template be filled by <em>mksite.py</em> by inspecting the database of variables 
-and the TEST_INFO section in <em>TestSuite</em>.</li>
-<li>A new Markdown file <strong>without underscore</strong> will be generated and included automagically in <em>mkdocs.yml</em></li>
+<li>The template be filled by <em>mksite.py</em> by inspecting the database of variables and the <em>TestSuite</em>.</li>
+<li>A new MD file <strong>without underscore</strong> will be generated and included in <em>mkdocs.yml</em></li>
 </ul>
+<!--
 <div class="alert alert-warning" role="alert">
     Developers should edit the version with the underscore and provide enough
     information in the declaration of the variable and in the `TEST_INFO` section
     so that mksite.py can fill the template.
     Remember to restart mksite.py to see the changes.    
 </div>
+-->
 </div>
 </div>
 </div></section></section><section><section>
@@ -13871,12 +13916,12 @@ and the TEST_INFO section in <em>TestSuite</em>.</li>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Testing-infrastructure">Testing infrastructure<a class="anchor-link" href="#Testing-infrastructure">&#182;</a></h2><ul>
 <li>Typos detected at runtime by <em>mksite.py</em> (check for WARNINGs in terminal)</li>
-<li>Website built by <em>abiref</em> bot (<em>mksite</em> step)</li>
+<li>Website built by <em>abiref</em> buldbot worker </li>
 <li>Linkcheck to detect broken links (@Jean-Michel)</li>
 </ul>
 <p>Still, we need <strong>human supervision</strong> to be sure the HTML doc looks OK 
 so, please, build the website on your machine before <em>git push</em>!</p>
-<h2 id="Tests-to-be-activated">Tests to be activated<a class="anchor-link" href="#Tests-to-be-activated">&#182;</a></h2><p>Pull requests won't be accepted if:</p>
+<h2 id="Tests-to-be-activated">Tests to be activated<a class="anchor-link" href="#Tests-to-be-activated">&#182;</a></h2><p>Pull request won't be accepted if:</p>
 <ul>
 <li>New variable is not documented and is not present, at least, in one input file</li>
 <li>New executables shall provide documentation </li>
